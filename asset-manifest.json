@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/restaurant-frontend/static/css/main.bacefdee.css",
+    "main.js": "/restaurant-frontend/static/js/main.bbfd6a05.js",
+    "static/js/787.7a031192.chunk.js": "/restaurant-frontend/static/js/787.7a031192.chunk.js",
+    "index.html": "/restaurant-frontend/index.html",
+    "main.bacefdee.css.map": "/restaurant-frontend/static/css/main.bacefdee.css.map",
+    "main.bbfd6a05.js.map": "/restaurant-frontend/static/js/main.bbfd6a05.js.map",
+    "787.7a031192.chunk.js.map": "/restaurant-frontend/static/js/787.7a031192.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bacefdee.css",
+    "static/js/main.bbfd6a05.js"
+  ]
+}
