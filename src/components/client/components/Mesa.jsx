@@ -136,8 +136,8 @@ function Mesa(props) {
     console.log("HORA MESA: " + value)
   };
 
-  var today = new Date(),
-  date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 1);
+  var date = new Date();
+  //date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 1);
 
   return (
     <div className='max-w-[1640px] m-auto px-4 py-12'>   
