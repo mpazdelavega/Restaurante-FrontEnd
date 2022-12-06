@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ProductCard from './productCard'
-import { getUserDetails } from '../../../services/auth'
-import ProductForm from '../../client/components/productForm'
 import { getAllProducts, getBestProducts } from '../../../services/product'
 import { addToCart } from '../../../services/shoppingCart'
 import { ToastContainer, toast } from "react-toastify"
@@ -9,31 +6,17 @@ import "react-toastify/dist/ReactToastify.css"
 import { getReservaList } from "../../../services/reserva";
 
 const Food = () => {
-  const [roles, setUserRole] = useState([{}])
   const [productList, setProductList] = useState([])
   const [bestProductList, setBestProductList] = useState([])
-  const [product, setProduct] = useState({ name: "", price: 0, description: "", category: "", image: "" })
   const [refresh, setRefresh] = useState(false)
-  const [openModal, setOpenModal] = useState(false)
-  const [showProductFeedback, setProductFeedback] = React.useState({ show: false, status: false, infoText: '' })
   const [listaReserva, setListaReserva] = useState([]);
 
   useEffect(() => {
-    getUserDetails({ setUserRole })
     getAllProducts({ setProductList })
     getBestProducts({ setBestProductList })
     getReservaList({ setListaReserva })
     console.log(listaReserva)
   }, [refresh])
-
-  const getUsuarioReserva = () => {
-    let user = '';
-    listaReserva.forEach((item) => {
-      user = item.client.id;
-    })
-    return user;
-  }
-
 
   const getEstadoReservaUsuario = () => {
     let estadoReserva = '';
@@ -41,14 +24,6 @@ const Food = () => {
       estadoReserva = item.estado_reserva;
     })
     return estadoReserva;
-  }
-
-  const getCategoria = () => {
-    let categoria = '';
-    productList.forEach((item) => {
-      categoria = item.category;
-    })
-    return categoria;
   }
 
   // const getReservas = () => {
@@ -69,13 +44,6 @@ const Food = () => {
     
   // };
 
-  const handleOpenModal = () => setOpenModal(true)
-  const closeProductFeedback = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setProductFeedback({ show: false });
-  };
   const addProduct = (productToAdd, amountToAdd) => {
     addToCart({ amountToAdd, productToAdd })
   }

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ProductCard from "./productCard";
 import { useParams } from "react-router-dom";
 import { getProductById, getRelatedProducts } from "../../../services/product";
-import { getUserDetails } from "../../../services/auth";
 import { addToCart } from "../../../services/shoppingCart";
 import { ToastContainer, toast } from "react-toastify"
 
@@ -10,19 +8,10 @@ function Detail() {
   const [amountToAdd, setAmount] = useState(1);
   const { id, category } = useParams();
   const [product, setProduct] = useState(null);
-  let [editProduct, setEditProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const [roles, setUserRole] = useState([]);
-  const [showProductFeedback, setProductFeedback] = React.useState({
-    show: false,
-    status: false,
-    infoText: "",
-  });
   const [refresh, setRefresh] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
   useEffect(() => {
     let shouldUpdate = true;
-    getUserDetails({ setUserRole });
     if (shouldUpdate) {
       Promise.all([
         getProductById(id.toString()),
@@ -30,27 +19,13 @@ function Detail() {
       ]).then((results) => {
         const [first, second] = results;
         setProduct(first);
-        setEditProduct(first);
         setRelatedProducts(second);
       });
     }
   }, [id, category, refresh]);
 
-  const add = () => {
-    setAmount(amountToAdd + 1);
-  };
-  const subtract = () => {
-    setAmount(amountToAdd - 1);
-  };
   const addProduct = (productToAdd) => {
     addToCart({ amountToAdd, productToAdd });
-  };
-  const handleOpenModal = () => setOpenModal(true);
-  const closeProductFeedback = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setProductFeedback({ show: false });
   };
 
   const notifyPedido = () => {

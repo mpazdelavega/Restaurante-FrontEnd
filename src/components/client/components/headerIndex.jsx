@@ -1,19 +1,14 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { BsFillCartFill } from "react-icons/bs";
-import { MdLogout, MdOutlineMenuBook, MdOutlineLogin } from "react-icons/md";
-import { RiReservedFill } from "react-icons/ri";
+import { MdLogout, MdOutlineLogin } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { IoCalendar } from "react-icons/io5";
 import { logout } from "../../../services/auth";
-import { getReservaList } from "../../../services/reserva";
 
 function HeaderIndex() {
   const [nav, setNav] = useState(false);
-  const [refresh, setRefresh] = useState(false);
   var navigate = useNavigate();
   let [number, setNumber] = useState(0);
-  const [listaReserva, setListaReserva] = useState([]);
   useEffect(() => {
     let shouldUpdate = true;
 
@@ -31,22 +26,6 @@ function HeaderIndex() {
       shouldUpdate = false;
     };
   }, [number]);
-
-  const getNumeroMesa = () => {
-    let nMesa = "";
-    listaReserva.forEach((item) => {
-      nMesa = item.mesa.id_mesa;
-    });
-    return nMesa;
-  };
-
-  const getEstadoReservaUsuario = () => {
-    let estadoReserva = '';
-    listaReserva.forEach((item) => {
-      estadoReserva = item.estado_reserva;
-    })
-    return estadoReserva;
-  }
 
   const closeSession = () => {
     logout({ navigate });
